@@ -1,6 +1,8 @@
 package guru.springframework.sfgdi;
 
 import guru.springframework.sfgdi.controllers.*;
+import guru.springframework.sfgdi.services.PrototypeBean;
+import guru.springframework.sfgdi.services.SingletnBn;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.ImportResource;
 public class SfgDiApplication {
 
 	public static void main(String[] args) {
+
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
 
 		PetController petController = ctx.getBean("petController", PetController.class);
@@ -37,6 +40,18 @@ public class SfgDiApplication {
 		System.out.println("-------- Constructor" );
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
+
+		System.out.println("########### Bean Scope Analysis #############");
+		SingletnBn singletnBn1=(SingletnBn)ctx.getBean("singletnBn");
+		singletnBn1.getMyScope();
+		SingletnBn singletnBn2=(SingletnBn)ctx.getBean("singletnBn");
+		singletnBn2.getMyScope();
+
+		PrototypeBean prototypeBean1=(PrototypeBean)ctx.getBean("prototypeBean");
+		prototypeBean1.getMyScope();
+		PrototypeBean prototypeBean2=(PrototypeBean)ctx.getBean("prototypeBean");
+		prototypeBean2.getMyScope();
+
 	}
 
 }
