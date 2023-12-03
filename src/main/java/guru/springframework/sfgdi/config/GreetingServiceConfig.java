@@ -22,7 +22,9 @@ public class GreetingServiceConfig {
 
     // @Service annotation is removed from the following classes to demonstrate
     // Java based DI (Previously - Annotation based/Stereotype DI)
-    @Bean
+
+    // constructorGreetingService is created via xml file
+//    @Bean
     ConstructorGreetingService constructorGreetingService(){
         return new ConstructorGreetingService();
     }

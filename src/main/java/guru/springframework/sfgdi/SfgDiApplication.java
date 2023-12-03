@@ -4,9 +4,11 @@ import guru.springframework.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication // scanBasePackages is no longer needed as the code is refactored as Java Config
 // (scanBasePackages={"guru.springframework.sfgdi","com.springframework.pets"})
+@ImportResource("classpath:sfgdi-config.xml")
 public class SfgDiApplication {
 
 	public static void main(String[] args) {
