@@ -1,18 +1,21 @@
 package guru.springframework.sfgdi;
 
 import guru.springframework.sfgdi.config.ExternalConfig;
+import guru.springframework.sfgdi.config.ExtlPropConstructorBindingConfig;
 import guru.springframework.sfgdi.controllers.*;
 import guru.springframework.sfgdi.datasource.FakeDataSource;
 import guru.springframework.sfgdi.services.PrototypeBean;
 import guru.springframework.sfgdi.services.SingletnBn;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication // scanBasePackages is no longer needed as the code is refactored as Java Config
 // (scanBasePackages={"guru.springframework.sfgdi","com.springframework.pets"})
 @ImportResource("classpath:sfgdi-config.xml")
+@EnableConfigurationProperties(ExtlPropConstructorBindingConfig.class)
 public class SfgDiApplication {
 
 	public static void main(String[] args) {
@@ -55,7 +58,10 @@ public class SfgDiApplication {
 		prototypeBean2.getMyScope();
 
 		// Configuring External Properties with Spring
+		// Configuring External Properties using ExtlPropConstructorBindingConfig
+		// Configuring External Properties using ExternalConfig
 		FakeDataSource fakeDataSource=ctx.getBean(FakeDataSource.class);
+		System.out.println("-------FakeDataSource Bean----");
 		System.out.println(fakeDataSource.getUsername());
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getJdbcurl());
@@ -66,6 +72,14 @@ public class SfgDiApplication {
 		System.out.println(externalConfig.getUsername());
 		System.out.println(externalConfig.getPassword());
 		System.out.println(externalConfig.getUrl());
+
+		// Configuring External Properties using Constructor Binding
+		ExtlPropConstructorBindingConfig extlPropConstructorBindingConfig=ctx.getBean(ExtlPropConstructorBindingConfig.class);
+		System.out.println("-----------Constructor Binding------");
+		System.out.println(extlPropConstructorBindingConfig.getUsername());
+		System.out.println(extlPropConstructorBindingConfig.getPassword());
+		System.out.println(extlPropConstructorBindingConfig.getUrl());
+
 	}
 
 }

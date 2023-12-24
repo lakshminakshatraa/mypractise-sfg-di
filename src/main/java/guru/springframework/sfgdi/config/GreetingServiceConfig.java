@@ -6,7 +6,6 @@ import guru.springframework.sfgdi.datasource.FakeDataSource;
 import guru.springframework.sfgdi.repositories.GreetingRepository;
 import guru.springframework.sfgdi.repositories.GreetingRepositoryImpl;
 import guru.springframework.sfgdi.services.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -15,19 +14,39 @@ import org.springframework.context.annotation.Profile;
 // @ImportResource("classpath:sfgdi-config.xml") --> this annotation is used in Main class.
 // It can also be used in Configuration class.
 
-// @PropertySource("classpath:datasource.properties")
+// @PropertySource("classpath:datasource.properties") -- used in Spring. application.properties/application.yml files are used in springboot
 @Configuration
 public class GreetingServiceConfig {
 
-    // Configuring external properties in spring - Section 6, lecture 88
+    // Configuring External Properties using ExtlPropConstructorBindingConfig
     @Bean
-    FakeDataSource fakeDataSource(@Value("${demo.username}") String username, @Value("${demo.password}")String password, @Value("${demo.url}")String jdbcurl){
-        FakeDataSource fakeDataSource=new FakeDataSource();
-        fakeDataSource.setUsername(username);
-        fakeDataSource.setPassword(password);
-        fakeDataSource.setJdbcurl(jdbcurl);
-        return fakeDataSource;
+    FakeDataSource fakeDataSource(ExtlPropConstructorBindingConfig extlPropConstructorBindingConfig){
+        FakeDataSource fakeDataSource1=new FakeDataSource();
+        fakeDataSource1.setUsername(extlPropConstructorBindingConfig.getUsername());
+        fakeDataSource1.setPassword(extlPropConstructorBindingConfig.getPassword());
+        fakeDataSource1.setJdbcurl(extlPropConstructorBindingConfig.getUrl());
+        return fakeDataSource1;
     }
+
+    // Configuring External Properties using ExtlPropConstructorBindingConfig
+//    @Bean
+//    FakeDataSource fakeDataSource(ExternalConfig externalConfig){
+//        FakeDataSource fakeDataSource1=new FakeDataSource();
+//        fakeDataSource1.setUsername(externalConfig.getUsername());
+//        fakeDataSource1.setPassword(externalConfig.getPassword());
+//        fakeDataSource1.setJdbcurl(externalConfig.getUrl());
+//        return fakeDataSource1;
+//    }
+
+    // Configuring external properties in spring - Section 6, lecture 88
+//    @Bean
+//    FakeDataSource fakeDataSource(@Value("${demo.username}") String username, @Value("${demo.password}")String password, @Value("${demo.url}")String jdbcurl){
+//        FakeDataSource fakeDataSource=new FakeDataSource();
+//        fakeDataSource.setUsername(username);
+//        fakeDataSource.setPassword(password);
+//        fakeDataSource.setJdbcurl(jdbcurl);
+//        return fakeDataSource;
+//    }
 
     // Bean with name - propGrtngService will be added to Spring Context
     // Bean name will be same as method name with @Bean annotation

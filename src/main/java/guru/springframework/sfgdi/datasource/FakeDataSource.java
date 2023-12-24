@@ -4,7 +4,7 @@ public class FakeDataSource {
     String username;
     String password;
     String jdbcurl;
-// Not needed as we are setting properties using Setters
+// Can declare vars as private final and remove Setters to use constructor DI effectively
 //    public FakeDataSource(String username, String password, String jdbcurl) {
 //        this.username = username;
 //        this.password = password;
