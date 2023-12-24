@@ -7,12 +7,15 @@ import guru.springframework.sfgdi.repositories.GreetingRepository;
 import guru.springframework.sfgdi.repositories.GreetingRepositoryImpl;
 import guru.springframework.sfgdi.services.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
-//@ImportResource("classpath:sfgdi-config.xml") --> this annotation is used in Main class.
+// @ImportResource("classpath:sfgdi-config.xml") --> this annotation is used in Main class.
 // It can also be used in Configuration class.
 
-@PropertySource("classpath:datasource.properties")
+// @PropertySource("classpath:datasource.properties")
 @Configuration
 public class GreetingServiceConfig {
 
