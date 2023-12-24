@@ -1,9 +1,21 @@
 spring:
   profiles:
-    active: EN,dog,dev  # dev/qa isn't provided as active profile. Hence, values from application.yml file is considered
-
+    active:   # When dev/qa/prod isn't provided as active profile. Hence, values from application.yml file is considered
+      - EN
+      - dog
+      - prod
 demo:
   username: YmlUser
   password: YmlPassword
   url: YmlUrl
+
+
+---
+spring:
+  profiles: prod
+
+demo:
+  username: YmlProdUser
+  password: YmlProdPassword
+  url: YmlProdUrl
 
