@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: EN,dog  # dev/qa isn't provided as active profile. Hence, values from application.yml file is considered
+    active: EN,dog,dev  # dev/qa isn't provided as active profile. Hence, values from application.yml file is considered
 
 demo:
   username: YmlUser
