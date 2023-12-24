@@ -1,5 +1,6 @@
 package guru.springframework.sfgdi;
 
+import guru.springframework.sfgdi.config.ExternalConfig;
 import guru.springframework.sfgdi.controllers.*;
 import guru.springframework.sfgdi.datasource.FakeDataSource;
 import guru.springframework.sfgdi.services.PrototypeBean;
@@ -59,6 +60,12 @@ public class SfgDiApplication {
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getJdbcurl());
 
+		// Configuring External Properties using @ConfigurationProperties
+		ExternalConfig externalConfig=ctx.getBean(ExternalConfig.class);
+		System.out.println("-------Config Props Bean------");
+		System.out.println(externalConfig.getUsername());
+		System.out.println(externalConfig.getPassword());
+		System.out.println(externalConfig.getUrl());
 	}
 
 }
